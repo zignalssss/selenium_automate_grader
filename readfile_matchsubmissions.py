@@ -23,27 +23,27 @@ def copy_matching_files_to_data(submissions_path, folder_name, data):
     for index, row in enumerate(data, start=1):
         id = row["your_key"]
 
-        # ตรวจสอบและสร้างโฟลเดอร์สำหรับ id
+        
         student_folder = os.path.join(folder_name, f'{id}')
         if not os.path.exists(student_folder):
             os.makedirs(student_folder)
 
-        # ค้นหาไฟล์ใน sub_folder1 และ sub_folder2 ที่ตรงกับ id
+       
         for subfolder in ['sub_folder1', 'sub_folder2']:
             subfolder_path = os.path.join(submissions_path, subfolder)
             if not os.path.exists(subfolder_path):
                 print(f"Subfolder '{subfolder}' does not exist. Skipping.")
                 continue
 
-             # สร้างโฟลเดอร์ย่อยสำหรับแต่ละประเภท (sub_folder1 หรือ sub_folder2) ภายใน folder
+          
             subfolder_student_folder = os.path.join(student_folder, subfolder)
             if not os.path.exists(subfolder_student_folder):
                 os.makedirs(subfolder_student_folder)
 
-            # ค้นหาไฟล์ที่ตรงกับ id
+           
             for filename in os.listdir(subfolder_path):
-                if filename.startswith(id):  # ตรวจสอบว่าไฟล์เริ่มต้นด้วย id
-                    # คัดลอกไฟล์ไปยังโฟลเดอร์ของ id
+                if filename.startswith(id):  
+                   
                     source_file = os.path.join(subfolder_path, filename)
                     destination_file = os.path.join(subfolder_student_folder, filename)
                     shutil.copy2(source_file, destination_file)
